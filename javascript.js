@@ -1,22 +1,43 @@
-let humanScore = 0;
-let computerScore = 0;
+const ComputerChoice = getComputerChoice().toLowerCase()
+const HumanChoice = getHumanChoice().toLowerCase()
 function getComputerChoice(){
    let random =  Math.floor(Math.random()*3)
      if (random == '1'){
-        message = 'Rock'}
+        return 'Rock'}
     else if(random == '0'){
-        message = 'Paper'}
+        return 'Paper'}
    else if (random == '2') {
-    message= 'Scissors'
+    return 'Scissors'
    }
-     return message
+   
+     return random
+     
 }
+
 function getHumanChoice(){
-    choice = prompt('Type a choice between Rock, Paper and Scissors')
+    choice =( prompt('Type a choice between Rock, Paper and Scissors'))
+    
+    return choice
 }
-function round(getComputerChoice,getHumanChoice){ 
+
+function playRound (ComputerChoice,HumanChoice){
+
+   
+    if(HumanChoice == ComputerChoice){
+        return `Game is a Tie ${HumanChoice } is same as ${ComputerChoice}`
+    }
+    else if (HumanChoice === 'rock' && ComputerChoice === 'scissors'){
+        return `You win ${HumanChoice} beats ${ComputerChoice}`
+    }
+    else if (HumanChoice === 'paper' && ComputerChoice === 'rock'){
+        return `You win ${HumanChoice} beats ${ComputerChoice}`
+    }
+    else if (HumanChoice === 'scissors' && ComputerChoice === 'paper'){
+        return `You Win ${HumanChoice} beats ${ComputerChoice}`
+    }
+    else {
+        return `You lose ${ComputerChoice} beats  ${HumanChoice}`
+    }
+
 }
-console.log(getHumanChoice())
-console.log(getComputerChoice())
-console.log(getComputerChoice())
-console.log(getComputerChoice())
+console.log(playRound(ComputerChoice,HumanChoice))
