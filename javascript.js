@@ -1,43 +1,80 @@
-const ComputerChoice = getComputerChoice().toLowerCase()
-const HumanChoice = getHumanChoice().toLowerCase()
+
 function getComputerChoice(){
-   let random =  Math.floor(Math.random()*3)
-     if (random == '1'){
+    ComputerChoice =  Math.floor(Math.random()*3)
+     if (ComputerChoice == '1'){
         return 'Rock'}
-    else if(random == '0'){
+    else if(ComputerChoice == '0'){
         return 'Paper'}
-   else if (random == '2') {
+   else if (ComputerChoice == '2') {
     return 'Scissors'
    }
    
-     return random
+     return ComputerChoice
      
 }
 
 function getHumanChoice(){
-    choice =( prompt('Type a choice between Rock, Paper and Scissors'))
+    HumanChoice =( prompt('Type a choice between Rock, Paper and Scissors'))
     
-    return choice
+    return HumanChoice
 }
 
-function playRound (ComputerChoice,HumanChoice){
-
+function  playRound(){
+    ComputerChoice = getComputerChoice().toLowerCase()
+    HumanChoice = getHumanChoice().toLowerCase()
    
-    if(HumanChoice == ComputerChoice){
-        return `Game is a Tie ${HumanChoice } is same as ${ComputerChoice}`
+     if(HumanChoice === ComputerChoice){
+        
+        return (`round is a draw ${HumanChoice } is similar to ${ComputerChoice}`)
     }
     else if (HumanChoice === 'rock' && ComputerChoice === 'scissors'){
-        return `You win ${HumanChoice} beats ${ComputerChoice}`
+        humanScore++
+        return (`you win  as ${HumanChoice} beats ${ComputerChoice}`)
     }
     else if (HumanChoice === 'paper' && ComputerChoice === 'rock'){
-        return `You win ${HumanChoice} beats ${ComputerChoice}`
+        humanScore++
+        return ( `You win as  ${HumanChoice} beats ${ComputerChoice}`)
     }
     else if (HumanChoice === 'scissors' && ComputerChoice === 'paper'){
-        return `You Win ${HumanChoice} beats ${ComputerChoice}`
+        humanScore++
+        return ( `You Win as  ${HumanChoice} beats ${ComputerChoice}`)
     }
-    else {
-        return `You lose ${ComputerChoice} beats  ${HumanChoice}`
+    else
+        computerScore++
+        return( `You lose computer wins ${ComputerChoice} beats  ${HumanChoice}`)
+    
+    
+}
+
+function playGame(){
+
+    humanScore = 0
+    
+    computerScore = 0
+    for( i = 0 ; i < 5 ; i++){
+    console.log( playRound());
+    console.log(`Computer Score ${computerScore}`)
+    console.log(`Human Score ${humanScore}`)
+}
+winner()
     }
 
-}
-console.log(playRound(ComputerChoice,HumanChoice))
+function  winner(){
+         if(humanScore > computerScore){
+            console.log(`You win the game by ${humanScore}`)
+
+        }else if (humanScore < computerScore){
+            console.log(`Computer wins the game ${computerScore}`)
+        }
+        else{
+            console.log(`Game is a tie`)
+        }
+    
+ }    
+
+
+    
+
+
+
+playGame()
