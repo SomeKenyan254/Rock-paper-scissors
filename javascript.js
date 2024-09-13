@@ -29,7 +29,7 @@ function  playRound(){
     }
     else if (HumanChoice === 'rock' && ComputerChoice === 'scissors'){
         humanScore++
-        return (`you win  as ${HumanChoice} beats ${ComputerChoice}`)
+      return (`you win  as ${HumanChoice} beats ${ComputerChoice}`)
     }
     else if (HumanChoice === 'paper' && ComputerChoice === 'rock'){
         humanScore++
