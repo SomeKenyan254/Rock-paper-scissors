@@ -1,3 +1,17 @@
+humanScore = 0;
+computerScore = 0;
+roundScore = 0;
+
+const result = document.createElement("div");
+const buttons = document.querySelectorAll(".button");
+const sect = document.querySelector(".container");
+const game = document.createElement("div")
+sect.appendChild(result)
+sect.appendChild(game)
+const Score = document.createElement("div")
+
+sect.appendChild(Score)
+
 
 function getComputerChoice(){
     ComputerChoice =  Math.floor(Math.random()*3)
@@ -12,69 +26,45 @@ function getComputerChoice(){
      return ComputerChoice
      
 }
-
-function getHumanChoice(){
-    HumanChoice =( prompt('Type a choice between Rock, Paper and Scissors'))
-    
-    return HumanChoice
-}
-
-function  playRound(){
+function  playRound(e){
     ComputerChoice = getComputerChoice().toLowerCase()
-    HumanChoice = getHumanChoice().toLowerCase()
+    HumanChoice = e.target.id.toLowerCase();
+    gameWinner()
+
+
    
-     if(HumanChoice === ComputerChoice){
+    if(HumanChoice === ComputerChoice){
         
-        return (`round is a draw ${HumanChoice } is similar to ${ComputerChoice}`)
+        result.textContent = [`round is a draw you both picked ${ComputerChoice}`]
     }
-    else if (HumanChoice === 'rock' && ComputerChoice === 'scissors'){
+    else if ((HumanChoice === 'rock' && ComputerChoice === 'scissors') ||
+     (HumanChoice === 'paper' && ComputerChoice === 'rock')
+        || 
+        (HumanChoice === 'scissors' && ComputerChoice === 'paper')){
+          
+    
+        result.textContent = [`Winner of the round!! ${HumanChoice} beats ${ComputerChoice} : `]
         humanScore++
-      return (`you win  as ${HumanChoice} beats ${ComputerChoice}`)
     }
-    else if (HumanChoice === 'paper' && ComputerChoice === 'rock'){
-        humanScore++
-        return ( `You win as  ${HumanChoice} beats ${ComputerChoice}`)
-    }
-    else if (HumanChoice === 'scissors' && ComputerChoice === 'paper'){
-        humanScore++
-        return ( `You Win as  ${HumanChoice} beats ${ComputerChoice}`)
-    }
-    else
+    else {
+       
+     
+        result.textContent = [ `Loser of  the round!! ${ComputerChoice}  beats  ${HumanChoice}: `]
         computerScore++
-        return( `You lose computer wins ${ComputerChoice} beats  ${HumanChoice}`)
-    
-    
-}
-
-function playGame(){
-
-    humanScore = 0
-    
-    computerScore = 0
-    for( i = 0 ; i < 5 ; i++){
-    console.log( playRound());
-    console.log(`Computer Score ${computerScore}`)
-    console.log(`Human Score ${humanScore}`)
-}
-winner()
     }
-
-function  winner(){
-         if(humanScore > computerScore){
-            console.log(`You win the game by ${humanScore}`)
-
-        }else if (humanScore < computerScore){
-            console.log(`Computer wins the game ${computerScore}`)
-        }
-        else{
-            console.log(`Game is a tie`)
-        }
-    
- }    
-
-
+   
     
 
+}
+function gameWinner(){
+    
+    if (humanScore == 5 && computerScore < humanScore)
+    {
+        game.textContent = ("You win 5 rounds")
+    }else if (computerScore == 5 && humanScore < computerScore){
+        game.textContent = ("You lose the 5 rounds")
+    }
+    Score.textContent = (`Current scores human :${humanScore} computer :${computerScore} `)
+}
 
-
-playGame()
+buttons.forEach((button) => { button.addEventListener("click", (playRound))})
