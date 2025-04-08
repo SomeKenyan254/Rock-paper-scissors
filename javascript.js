@@ -1,6 +1,6 @@
-humanScore = 0;
-computerScore = 0;
-roundScore = 0;
+let humanScore = 0;
+let computerScore = 0
+
 
 const result = document.createElement("div");
 const buttons = document.querySelectorAll(".button");
@@ -14,12 +14,12 @@ sect.appendChild(Score)
 
 
 function getComputerChoice(){
-    ComputerChoice =  Math.floor(Math.random()*3)
-     if (ComputerChoice == '1'){
+   const ComputerChoice =  Math.floor(Math.random()*3)
+     if (ComputerChoice == 1){
         return 'Rock'}
-    else if(ComputerChoice == '0'){
+    else if(ComputerChoice == 0){
         return 'Paper'}
-   else if (ComputerChoice == '2') {
+   else if (ComputerChoice == 2) {
     return 'Scissors'
    }
    
@@ -35,21 +35,16 @@ function  playRound(e){
    
     if(HumanChoice === ComputerChoice){
         
-        result.textContent = [`round is a draw you both picked ${ComputerChoice}`]
+        result.textContent = `round is a draw you both picked ${ComputerChoice}`
     }
     else if ((HumanChoice === 'rock' && ComputerChoice === 'scissors') ||
-     (HumanChoice === 'paper' && ComputerChoice === 'rock')
-        || 
+     (HumanChoice === 'paper' && ComputerChoice === 'rock')|| 
         (HumanChoice === 'scissors' && ComputerChoice === 'paper')){
-          
-    
-        result.textContent = [`Winner of the round!! ${HumanChoice} beats ${ComputerChoice} : `]
+          result.textContent = `Winner of the round!! ${HumanChoice} beats ${ComputerChoice} : `
         humanScore++
     }
     else {
-       
-     
-        result.textContent = [ `Loser of  the round!! ${ComputerChoice}  beats  ${HumanChoice}: `]
+       result.textContent =  `Loser of  the round!! ${ComputerChoice}  beats  ${HumanChoice}: `
         computerScore++
     }
    
