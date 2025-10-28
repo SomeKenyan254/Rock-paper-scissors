@@ -2,16 +2,20 @@ let humanScore = 0;
 let computerScore = 0
 
 
+
 const result = document.createElement("div");
 const buttons = document.querySelectorAll(".button");
 const sect = document.querySelector(".container");
+const scoreDisplay = document.createElement('div')
+scoreDisplay.className = "roundWinner";
 const game = document.createElement("div")
-sect.appendChild(result)
+scoreDisplay.appendChild(result)
+sect.appendChild(scoreDisplay)
 sect.appendChild(game)
 const Score = document.createElement("div")
 
 sect.appendChild(Score)
-
+buttons.forEach((button) =>  button.addEventListener("click", (playRound)))
 
 function getComputerChoice(){
    const ComputerChoice =  Math.floor(Math.random()*3)
@@ -27,15 +31,13 @@ function getComputerChoice(){
      
 }
 function  playRound(e){
-    ComputerChoice = getComputerChoice().toLowerCase()
-    HumanChoice = e.target.id.toLowerCase();
-    gameWinner()
-
-
+     if(computerScore < 5 && humanScore < 5 ){
+    const ComputerChoice = getComputerChoice().toLowerCase();
+    let HumanChoice = e.target.id.toLowerCase();
    
     if(HumanChoice === ComputerChoice){
         
-        result.textContent = `round is a draw you both picked ${ComputerChoice}`
+        result.textContent = `round is a draw: Player ${HumanChoice} : Computer;${ComputerChoice}`
     }
     else if ((HumanChoice === 'rock' && ComputerChoice === 'scissors') ||
      (HumanChoice === 'paper' && ComputerChoice === 'rock')|| 
@@ -47,19 +49,31 @@ function  playRound(e){
        result.textContent =  `Loser of  the round!! ${ComputerChoice}  beats  ${HumanChoice}: `
         computerScore++
     }
+}       
+      updateScore()
+      gameWinner()
    
     
 
 }
+function updateScore(){
+    Score.textContent = `Current scores - Human:${humanScore} | Computer: ${computerScore}`
+}
 function gameWinner(){
-    
-    if (humanScore == 5 && computerScore < humanScore)
+    if (humanScore == 5 )
     {
         game.textContent = ("You win 5 rounds")
-    }else if (computerScore == 5 && humanScore < computerScore){
+        disableButtons();
+        
+    }else if (computerScore == 5 ){
         game.textContent = ("You lose the 5 rounds")
-    }
-    Score.textContent = (`Current scores human :${humanScore} computer :${computerScore} `)
+        disableButtons();
+        
+    } 
+    
+   
 }
-
-buttons.forEach((button) => { button.addEventListener("click", (playRound))})
+function disableButtons(){
+    buttons.forEach(button => button.disabled = true)
+}
+updateScore()

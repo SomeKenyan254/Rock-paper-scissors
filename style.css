@@ -1,0 +1,24 @@
+*{
+	margin: 0;
+	padding:0;
+	
+	
+	
+}
+.container{
+	display:flex;
+	flex-direction: column;
+	height: 100vh;
+
+
+}
+.container div{
+	background: peachpuff;
+	height: 100px;
+	
+  
+}
+.roundWinner{
+		border: 2px solid  black;
+
+}
